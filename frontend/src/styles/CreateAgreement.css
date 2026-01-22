@@ -1,0 +1,56 @@
+.create-agreement h2 {
+  margin-bottom: 0.5rem;
+}
+
+.create-agreement .description {
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+.create-agreement .result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--success);
+  border-radius: 0.5rem;
+}
+
+.create-agreement .result h3 {
+  color: var(--success);
+  margin-bottom: 1rem;
+}
+
+.share-section {
+  margin: 1.5rem 0;
+}
+
+.link-box {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.link-box input {
+  flex: 1;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--text);
+  font-family: monospace;
+}
+
+.btn-copy {
+  padding: 0.75rem 1.5rem;
+  background: var(--success);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-copy:hover {
+  background: #0ea471;
+}
