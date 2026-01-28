@@ -27,10 +27,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       // Check for Leo Wallet or other Aleo wallets
       if (typeof window !== 'undefined' && (window as any).leoWallet) {
         const wallet = (window as any).leoWallet
-        const accounts = await wallet.getAccounts()
-        if (accounts && accounts.length > 0) {
+        // Try to get current account without prompting
+        const account = await wallet.account
+        if (account && account.address) {
           setConnected(true)
-          setAddress(accounts[0])
+          setAddress(account.address)
         }
       }
     } catch (err) {
@@ -52,15 +53,18 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
       const wallet = (window as any).leoWallet
 
-      // Request connection
-      const accounts = await wallet.requestAccounts()
+      // Request connection - Leo Wallet uses connect() method
+      await wallet.connect()
 
-      if (!accounts || accounts.length === 0) {
+      // Get the connected account
+      const account = await wallet.account
+
+      if (!account || !account.address) {
         throw new Error('No accounts found. Please create an account in Leo Wallet.')
       }
 
       setConnected(true)
-      setAddress(accounts[0])
+      setAddress(account.address)
       setError(null)
     } catch (err: any) {
       console.error('Error connecting wallet:', err)
