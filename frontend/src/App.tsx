@@ -3,15 +3,12 @@ import './App.css'
 import CreateAgreement from './components/CreateAgreement'
 import SignAgreement from './components/SignAgreement'
 import VerifyAgreement from './components/VerifyAgreement'
-import { useWallet } from './contexts/WalletContext'
+import { WalletMultiButton } from '@demox-labs/aleo-wallet-adapter-reactui'
+import { useWallet } from '@demox-labs/aleo-wallet-adapter-react'
 
 function App() {
   const [activeTab, setActiveTab] = useState<'create' | 'sign' | 'verify'>('create')
-  const { connected, address, connecting, connect, disconnect, error } = useWallet()
-
-  const shortenAddress = (addr: string) => {
-    return `${addr.slice(0, 10)}...${addr.slice(-8)}`
-  }
+  const { connected } = useWallet()
 
   return (
     <div className="app">
@@ -22,23 +19,7 @@ function App() {
             <p className="tagline">Privacy-Preserving NDAs on Aleo</p>
           </div>
           <div className="wallet-section">
-            {error && <div className="wallet-error">{error}</div>}
-            {!connected ? (
-              <button
-                className="connect-wallet"
-                onClick={connect}
-                disabled={connecting}
-              >
-                {connecting ? 'Connecting...' : 'Connect Wallet'}
-              </button>
-            ) : (
-              <div className="wallet-connected">
-                <span className="wallet-address">{shortenAddress(address!)}</span>
-                <button className="disconnect-wallet" onClick={disconnect}>
-                  Disconnect
-                </button>
-              </div>
-            )}
+            <WalletMultiButton />
           </div>
         </div>
       </header>

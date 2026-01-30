@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { useWallet } from '../contexts/WalletContext'
+import { useWallet } from '@demox-labs/aleo-wallet-adapter-react'
 import '../styles/CreateAgreement.css'
 
 export default function CreateAgreement() {
-  const { address } = useWallet()
+  const { publicKey } = useWallet()
+  const address = publicKey
   const [ndaText, setNdaText] = useState('')
   const [partyB, setPartyB] = useState('')
   const [loading, setLoading] = useState(false)
