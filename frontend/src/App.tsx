@@ -8,7 +8,7 @@ import { useWallet } from '@demox-labs/aleo-wallet-adapter-react'
 
 function App() {
   const [activeTab, setActiveTab] = useState<'create' | 'sign' | 'verify'>('create')
-  const { connected } = useWallet()
+  const { connected, publicKey } = useWallet()
 
   return (
     <div className="app">
@@ -34,10 +34,6 @@ function App() {
               Don't have a wallet? Install{' '}
               <a href="https://leo.app/" target="_blank" rel="noopener noreferrer">
                 Leo Wallet
-              </a>{' '}
-              or{' '}
-              <a href="https://puzzle.online/" target="_blank" rel="noopener noreferrer">
-                Puzzle Wallet
               </a>
             </p>
           </div>
@@ -67,7 +63,7 @@ function App() {
             </div>
 
             <div className="content">
-              {activeTab === 'create' && <CreateAgreement />}
+              {activeTab === 'create' && <CreateAgreement address={publicKey} />}
               {activeTab === 'sign' && <SignAgreement />}
               {activeTab === 'verify' && <VerifyAgreement />}
             </div>
